@@ -3,6 +3,7 @@
 {% block content %}
 <h2 class="mb-4">Transactions en attente</h2>
 {% if pending %}
+<p class="text-muted">Cliquez sur <strong>Miner un bloc</strong> pour valider ces transactions.</p>
 <ul class="list-group">
   {% for tx in pending %}
   <li class="list-group-item mb-2">

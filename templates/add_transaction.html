@@ -22,3 +22,21 @@
   <button type="submit" class="btn btn-primary">Ajouter la transaction</button>
 </form>
 {% endblock %}
+
+{% block scripts %}
+<script>
+  document.querySelector('form').addEventListener('submit', function(e) {
+    const sender = document.getElementById('sender');
+    const recipient = document.getElementById('recipient');
+    const amount = document.getElementById('amount');
+    let valid = true;
+    if (!sender.value.trim()) { sender.classList.add('is-invalid'); valid = false; }
+    if (!recipient.value.trim()) { recipient.classList.add('is-invalid'); valid = false; }
+    const value = parseFloat(amount.value);
+    if (isNaN(value) || value <= 0) { amount.classList.add('is-invalid'); valid = false; }
+    if (!valid) {
+      e.preventDefault();
+    }
+  });
+</script>
+{% endblock %}

@@ -19,6 +19,7 @@ Le serveur écoute par défaut sur http://localhost:5000.
 from __future__ import annotations
 
 from flask import Flask, render_template, request, redirect, url_for, flash
+from datetime import datetime
 from blockchain.blockchain import Blockchain
 import os
 
@@ -37,15 +38,36 @@ blockchain = Blockchain(difficulty=DIFFICULTY, autosave=True, storage_path=STORA
 @app.route("/")
 def index():
     """Page d’accueil affichant quelques statistiques et liens rapides."""
+    labels = [str(b.index) for b in blockchain.chain]
+    tx_counts = [len(b.transactions) for b in blockchain.chain]
     return render_template(
-        "index.html", chain_length=len(blockchain.chain), difficulty=blockchain.difficulty
+        "index.html",
+        chain_length=len(blockchain.chain),
+        difficulty=blockchain.difficulty,
+        labels=labels,
+        tx_counts=tx_counts,
     )
 
 
 @app.route("/chain")
 def show_chain():
     """Affiche la liste des blocs avec leurs transactions."""
-    return render_template("chain.html", chain=blockchain.chain)
+    table_data = []
+    for b in blockchain.chain:
+        total = sum(
+            float(tx.get("amount", 0))
+            for tx in b.transactions
+            if isinstance(tx.get("amount"), (int, float))
+        )
+        table_data.append(
+            {
+                "index": b.index,
+                "timestamp": datetime.fromtimestamp(b.timestamp).strftime("%Y-%m-%d %H:%M:%S"),
+                "tx_count": len(b.transactions),
+                "total": total,
+            }
+        )
+    return render_template("chain.html", chain=blockchain.chain, table_data=table_data)
 
 
 @app.route("/pending")

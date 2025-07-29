@@ -3,6 +3,28 @@
 {% block content %}
 <h2 class="mb-4">Blockchain complète</h2>
 <p>La chaîne contient {{ chain|length }} bloc{{ 's' if chain|length > 1 else '' }}.</p>
+
+<table id="blocksTable" class="table table-striped table-dark mb-4">
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Date</th>
+      <th>Tx</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in table_data %}
+    <tr>
+      <td>{{ row.index }}</td>
+      <td>{{ row.timestamp }}</td>
+      <td>{{ row.tx_count }}</td>
+      <td>{{ '%.2f'|format(row.total) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 <div class="accordion accordion-flush" id="chainAccordion">
   {% for block in chain %}
   <div class="accordion-item">
@@ -37,4 +59,12 @@
   </div>
   {% endfor %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('#blocksTable').DataTable();
+  });
+</script>
 {% endblock %}

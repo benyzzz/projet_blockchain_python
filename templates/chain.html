@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Blockchain complète</h2>
+<h2 class="mb-4">Blockchain complète</h2>
 <p>La chaîne contient {{ chain|length }} bloc{{ 's' if chain|length > 1 else '' }}.</p>
-<div class="accordion" id="chainAccordion">
+<div class="accordion accordion-flush" id="chainAccordion">
   {% for block in chain %}
   <div class="accordion-item">
     <h2 class="accordion-header" id="heading{{ loop.index }}">

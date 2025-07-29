@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Blockchain complète</h2>
+<p>La chaîne contient {{ chain|length }} bloc{{ 's' if chain|length > 1 else '' }}.</p>
+<div class="accordion" id="chainAccordion">
+  {% for block in chain %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ loop.index }}">
+      <button class="accordion-button {{ 'collapsed' if not loop.first }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="collapse{{ loop.index }}">
+        Bloc {{ block.index }}
+      </button>
+    </h2>
+    <div id="collapse{{ loop.index }}" class="accordion-collapse collapse {{ 'show' if loop.first else '' }}" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#chainAccordion">
+      <div class="accordion-body">
+        <ul class="list-unstyled">
+          <li><strong>Index :</strong> {{ block.index }}</li>
+          <li><strong>Timestamp :</strong> {{ block.timestamp }}</li>
+          <li><strong>Précédent hash :</strong> {{ block.previous_hash }}</li>
+          <li><strong>Hash :</strong> {{ block.hash }}</li>
+          <li><strong>Nonce :</strong> {{ block.nonce }}</li>
+        </ul>
+        <h5>Transactions ({{ block.transactions|length }})</h5>
+        {% if block.transactions %}
+        <ul class="list-group list-group-flush">
+          {% for tx in block.transactions %}
+          <li class="list-group-item">
+            <code>{{ tx }}</code>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Aucune transaction dans ce bloc.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

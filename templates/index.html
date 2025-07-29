@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+    <h1>Bienvenue sur la blockchain simplifiée</h1>
+    <p>Nombre de blocs : <strong>{{ chain_length }}</strong></p>
+    <p>Difficulté actuelle : <strong>{{ difficulty }}</strong></p>
+    <p>
+      Utilisez la barre de navigation pour consulter la chaîne,
+      ajouter des transactions, miner un bloc ou valider l’intégrité de la chaîne.
+    </p>
+  </div>
+</div>
+{% endblock %}

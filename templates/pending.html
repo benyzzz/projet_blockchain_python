@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Transactions en attente</h2>
+{% if pending %}
+<ul class="list-group">
+  {% for tx in pending %}
+  <li class="list-group-item">
+    <code>{{ tx }}</code>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Aucune transaction en attente.</p>
+{% endif %}
+{% endblock %}

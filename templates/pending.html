@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Transactions en attente</h2>
+<h2 class="mb-4">Transactions en attente</h2>
 {% if pending %}
 <ul class="list-group">
   {% for tx in pending %}
-  <li class="list-group-item">
+  <li class="list-group-item mb-2">
     <code>{{ tx }}</code>
   </li>
   {% endfor %}

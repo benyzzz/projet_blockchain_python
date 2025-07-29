@@ -12,8 +12,31 @@
           Utilisez la navigation pour consulter la chaîne, ajouter des transactions,
           miner un bloc ou valider l’intégrité de la chaîne.
         </p>
+        <canvas id="txChart" height="200"></canvas>
       </div>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const ctx = document.getElementById('txChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{ labels | tojson }},
+      datasets: [{
+        label: 'Transactions par bloc',
+        data: {{ tx_counts | tojson }},
+        backgroundColor: '#0d6efd'
+      }]
+    },
+    options: {
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+</script>
 {% endblock %}

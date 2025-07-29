@@ -1,9 +1,9 @@
-body {
+body.dark {
   background: linear-gradient(135deg, #101020, #1c1c2d);
   color: #f8f9fa;
 }
 
-.card {
+body.dark .card {
   background-color: #212130;
   border-color: #2c2c3c;
 }
@@ -15,4 +15,22 @@ body {
 .navbar-brand {
   font-weight: bold;
   letter-spacing: 1px;
+}
+
+.blockchain-diagram {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blockchain-diagram .block {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--bs-secondary);
+  border-radius: 0.25rem;
+}
+
+.blockchain-diagram .arrow {
+  font-size: 1.25rem;
 }

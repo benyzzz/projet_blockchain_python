@@ -84,12 +84,15 @@
       function setTheme(theme) {
         const link = document.getElementById('theme-link');
         const btn = document.getElementById('themeToggle');
+        const body = document.body;
         if (theme === 'light') {
           link.href = 'https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/flatly/bootstrap.min.css';
           btn.textContent = 'Mode sombre';
+          body.classList.remove('dark');
         } else {
           link.href = 'https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/cyborg/bootstrap.min.css';
           btn.textContent = 'Mode clair';
+          body.classList.add('dark');
         }
         localStorage.setItem('theme', theme);
       }

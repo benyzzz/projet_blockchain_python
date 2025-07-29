@@ -9,34 +9,22 @@
         <p class="card-text">Nombre de blocs : <strong>{{ chain_length }}</strong></p>
         <p class="card-text">Difficulté actuelle : <strong>{{ difficulty }}</strong></p>
         <p class="card-text">
-          Utilisez la navigation pour consulter la chaîne, ajouter des transactions,
-          miner un bloc ou valider l’intégrité de la chaîne.
+          Utilisez la navigation pour consulter la chaîne, ajouter des transactions
+          puis miner un bloc.
         </p>
-        <canvas id="txChart" height="200"></canvas>
+        <div class="blockchain-diagram my-4">
+          <div class="block">Bloc&nbsp;0</div>
+          <div class="arrow">&rarr;</div>
+          <div class="block">Bloc&nbsp;1</div>
+          <div class="arrow">&rarr;</div>
+          <div class="block">Bloc&nbsp;2</div>
+        </div>
+        <p class="card-text">
+          Pour valider ces transactions, cliquez sur <em>Miner un bloc</em> une fois
+          des transactions ajoutées.
+        </p>
       </div>
     </div>
   </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-  const ctx = document.getElementById('txChart');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: {{ labels | tojson }},
-      datasets: [{
-        label: 'Transactions par bloc',
-        data: {{ tx_counts | tojson }},
-        backgroundColor: '#0d6efd'
-      }]
-    },
-    options: {
-      scales: {
-        y: { beginAtZero: true }
-      }
-    }
-  });
-</script>
 {% endblock %}
